@@ -39,9 +39,11 @@ class UserController {
       else {
         UserModel userModel = UserModel();
         userModel.id = uid;
+        userModel.name = userProvider.firebaseUser?.displayName ?? "";
         userModel.mobile = userProvider.firebaseUser?.phoneNumber ?? "";
         userModel.email = userProvider.firebaseUser?.email ?? "";
         userModel.image = userProvider.firebaseUser?.photoURL ?? "";
+        userModel.createdTime = Timestamp.now();
         bool isSuccess = await UserController().createUser(context, userModel);
         MyPrint.printOnConsole("Insert Client Success:${isSuccess}");
       }
