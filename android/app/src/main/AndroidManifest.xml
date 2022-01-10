@@ -2,7 +2,7 @@
     package="com.fisproject.pet_friendly">
    <application
         android:label="pet_friendly"
-        android:name="${applicationName}"
+        android:name="Pet Friendly"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"
