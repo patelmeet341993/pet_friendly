@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:pet_friendly/controllers/authentication_controller.dart';
 import 'package:pet_friendly/controllers/providers/connection_provider.dart';
+import 'package:pet_friendly/controllers/providers/user_provider.dart';
+import 'package:pet_friendly/controllers/user_controller.dart';
+import 'package:pet_friendly/screens/authentication/login_screen.dart';
+import 'package:pet_friendly/screens/home_screen/main_page.dart';
 import 'package:pet_friendly/utils/SizeConfig.dart';
 import 'package:pet_friendly/utils/my_print.dart';
 import 'package:pet_friendly/utils/styles.dart';
@@ -36,29 +41,12 @@ class _SplashScreenState extends State<SplashScreen> {
 
     //await Future.delayed(Duration(seconds: 3));
     if(await AuthenticationController().isUserLogin(context: context, initializeUserid: true)) {
-      ClientProvider clientProvider = Provider.of<ClientProvider>(context, listen: false);
+      UserProvider userProvider = Provider.of<UserProvider>(context, listen: false);
 
-      bool isExist = await ClientController().isClientExist(context, clientProvider.clientId!);
+      bool isExist = await UserController().isUserExist(context, userProvider.userid);
       MyPrint.printOnConsole("IsUserExist:${isExist}");
 
-      await NotificationController().subscribeToTopic("announcement");
-      await DataController().getAllThemesByClientid(clientProvider.clientId!);
-
-      if(isExist) {
-        Navigator.pushNamedAndRemoveUntil(context, MainPage.routeName, (route) => false);
-      }
-      else {
-        Navigator.pushNamedAndRemoveUntil(
-          context,
-          AddEditBussinessScreen.routeName,
-              (route) => false,
-          arguments: {
-            "isCallingFirstTime" : true,
-            "email" : clientProvider.firebaseUser?.email,
-            "mobile" : clientProvider.firebaseUser?.phoneNumber,
-          },
-        );
-      }
+      Navigator.pushNamedAndRemoveUntil(context, MainPage.routeName, (route) => false);
     }
     else {
       Navigator.pushNamedAndRemoveUntil(context, LoginScreen.routeName, (_) => false);

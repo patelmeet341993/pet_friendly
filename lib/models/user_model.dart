@@ -40,6 +40,19 @@ class UserModel {
   }
 
   Map<String, dynamic> tomap() {
+    return {
+      "id" : id,
+      "name" : name,
+      "image" : image,
+      "mobile" : mobile,
+      "email" : email,
+      "createdTime" : createdTime,
+      "myLikedPosts" : myLikedPosts,
+    };
+  }
 
+  @override
+  String toString() {
+    return "id:${id}, name:$name, image:$image, mobile:$mobile, email:$email, createdTime:$createdTime, myLikedPosts:$myLikedPosts";
   }
 }

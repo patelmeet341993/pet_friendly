@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pet_friendly/screens/authentication/login_screen.dart';
 import 'package:pet_friendly/screens/authentication/otp_screen.dart';
+import 'package:pet_friendly/screens/home_screen/create_post_screen.dart';
 import 'package:pet_friendly/screens/home_screen/main_page.dart';
 import 'package:pet_friendly/splash_screen.dart';
 import 'package:pet_friendly/utils/my_print.dart';
@@ -10,7 +11,7 @@ class NavigationController {
   Route? onGeneratedRoutes(RouteSettings routeSettings) {
     MyPrint.printOnConsole("OnGeneratedRoutes Called for ${routeSettings.name} with arguments:${routeSettings.arguments}");
 
-    Widget widget;
+    Widget? widget;
 
     switch(routeSettings.name) {
       case SplashScreen.routeName : {
@@ -22,11 +23,18 @@ class NavigationController {
         break;
       }
       case OtpScreen.routeName : {
-        widget = const OtpScreen();
+        String mobile = routeSettings.arguments?.toString() ?? "";
+        if (mobile.isNotEmpty) {
+          widget = OtpScreen(mobile: mobile,);
+        }
         break;
       }
       case MainPage.routeName : {
         widget = const MainPage();
+        break;
+      }
+      case CreatePostScreen.routeName : {
+        widget = const CreatePostScreen();
         break;
       }
       default : {
@@ -34,6 +42,6 @@ class NavigationController {
       }
     }
 
-    return MaterialPageRoute(builder: (_) => widget);
+    if(widget != null)return MaterialPageRoute(builder: (_) => widget!);
   }
 }

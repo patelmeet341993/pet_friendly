@@ -1,8 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.fisproject.pet_friendly">
    <application
-        android:label="pet_friendly"
-        android:name="Pet Friendly"
+        android:label="Pet Friendly"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"

@@ -3,7 +3,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:pet_friendly/controllers/providers/user_provider.dart';
+import 'package:pet_friendly/screens/authentication/login_screen.dart';
 import 'package:pet_friendly/utils/my_print.dart';
+import 'package:pet_friendly/utils/snakbar.dart';
 import 'package:provider/provider.dart';
 
 //To Perform Authentication Operations
@@ -11,9 +13,7 @@ class AuthenticationController {
   static AuthenticationController? _instance;
 
   factory AuthenticationController() {
-    if(_instance == null) {
-      _instance = AuthenticationController._();
-    }
+    _instance ??= AuthenticationController._();
     return _instance!;
   }
 
@@ -27,7 +27,8 @@ class AuthenticationController {
     bool isLogin = user != null;
     if(isLogin && initializeUserid && context != null) {
       UserProvider userProvider = Provider.of<UserProvider>(context, listen: false);
-      userProvider.clientId = user.uid;
+      userProvider.userid = user.uid;
+      userProvider.firebaseUser = user;
       //clientProvider.clientId = "CI008";
       userProvider.firebaseUser = user;
     }
@@ -71,7 +72,7 @@ class AuthenticationController {
               MyPrint.printOnConsole("Methods:${methods}");
 
               MyPrint.printOnConsole("Message:Account Already Exist With Different Method");
-              MyToast.showError(context: context, msg: "Account Already Exist With Different Method");
+              Snakbar().show_error_snakbar(context, "Account Already Exist With Different Method");
             }
             break;
 
@@ -79,35 +80,35 @@ class AuthenticationController {
             {
               message = "Credential is Invalid";
               MyPrint.printOnConsole("Message:Invalid Credentials");
-              MyToast.showError(context: context, msg: "Invalid Credentials");
+              Snakbar().show_error_snakbar(context, "Invalid Credentials");
             }
             break;
 
           case "operation-not-allowed" :
             {
               MyPrint.printOnConsole("Message:${e.message}");
-              MyToast.showError(context: context, msg: "${e.message}");
+              Snakbar().show_error_snakbar(context, "${e.message}");
             }
             break;
 
           case "user-disabled" :
             {
               MyPrint.printOnConsole("Message:${e.message}");
-              MyToast.showError(context: context, msg: "${e.message}");
+              Snakbar().show_error_snakbar(context, "${e.message}");
             }
             break;
 
           case "user-not-found" :
             {
               MyPrint.printOnConsole("Message:${e.message}");
-              MyToast.showError(context: context, msg: "${e.message}");
+              Snakbar().show_error_snakbar(context, "${e.message}");
             }
             break;
 
           case "wrong-password" :
             {
               MyPrint.printOnConsole("Message:${e.message}");
-              MyToast.showError(context: context, msg: "${e.message}");
+              Snakbar().show_error_snakbar(context, "${e.message}");
             }
             break;
 
@@ -115,7 +116,7 @@ class AuthenticationController {
             {
               message = "Error in Authentication";
               MyPrint.printOnConsole("Message:${e.message}");
-              MyToast.showError(context: context, msg: "${e.message}");
+              Snakbar().show_error_snakbar(context, "${e.message}");
             }
         }
       }
@@ -126,11 +127,10 @@ class AuthenticationController {
 
   //Will logout from system and remove data from UserProvider and local memory
   Future<bool> logout(BuildContext context) async {
-    ClientProvider clientProvider = Provider.of<ClientProvider>(context, listen: false);
-    clientProvider.firebaseUser = null;
-    clientProvider.clientModel = null;
-    clientProvider.clientId = null;
-    clientProvider.my_bussiness = [];
+    UserProvider userProvider = Provider.of<UserProvider>(context, listen: false);
+    userProvider.firebaseUser = null;
+    userProvider.userModel = null;
+    userProvider.userid = "";
 
     await FirebaseAuth.instance.signOut();
     await GoogleSignIn().signOut();

@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:pet_friendly/controllers/navigation_controller.dart';
 import 'package:pet_friendly/controllers/providers/connection_provider.dart';
 import 'package:pet_friendly/controllers/providers/post_provider.dart';
+import 'package:pet_friendly/controllers/providers/user_provider.dart';
 import 'package:pet_friendly/splash_screen.dart';
 import 'package:provider/provider.dart';
 
@@ -23,6 +24,7 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider<ConnectionProvider>(create: (_) => ConnectionProvider(),),
         ChangeNotifierProvider<PostProvider>(create: (_) => PostProvider(),),
+        ChangeNotifierProvider<UserProvider>(create: (_) => UserProvider(),),
       ],
       child: const MainApp(),
     );
