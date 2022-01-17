@@ -122,6 +122,19 @@ class _CommentsScreenState extends State<CommentsScreen> {
                       crossAxisAlignment: CrossAxisAlignment.end,
                       mainAxisSize: MainAxisSize.min,
                       children: [
+                        Container(
+                          padding: const EdgeInsets.only(left: 16),
+                          child: Text(
+                            comment.createdByName,
+                            style: TextStyle(
+                              fontSize: MySize.size10,
+                              color: Colors.white.withOpacity(0.7),
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          height: MySize.size5,
+                        ),
                         Flexible(
                           child: Container(
                             child: SelectableText(
@@ -249,6 +262,19 @@ class _CommentsScreenState extends State<CommentsScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisSize: MainAxisSize.min,
                       children: [
+                        Container(
+                          padding: const EdgeInsets.only(left: 16),
+                          child: Text(
+                            comment.createdByName,
+                            style: TextStyle(
+                              fontSize: MySize.size10,
+                              color: Colors.white.withOpacity(0.7),
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          height: MySize.size5,
+                        ),
                         Flexible(
                           child: Container(
                             child: SelectableText(

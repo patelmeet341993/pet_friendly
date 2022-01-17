@@ -12,7 +12,7 @@ class PostController {
   Future<List<PostModel>> getPosts(BuildContext context) async {
     List<PostModel> posts = [];
 
-    QuerySnapshot<Map<String, dynamic>> querySnapshot = await FirestoreController().firestore.collection("posts").get();
+    QuerySnapshot<Map<String, dynamic>> querySnapshot = await FirestoreController().firestore.collection("posts").orderBy("createdTime", descending: true).get();
     querySnapshot.docs.forEach((DocumentSnapshot<Map<String, dynamic>> documentSnapshot) {
       if(documentSnapshot.data()?.isNotEmpty ?? false) posts.add(PostModel.fromMap(documentSnapshot.data()!));
     });
