@@ -61,7 +61,7 @@ class _PostWidgetState extends State<PostWidget> {
 
   Widget getHeader(PostModel postModel) {
     return Container(
-      margin: EdgeInsets.symmetric(vertical: MySize.size10!),
+      margin: EdgeInsets.symmetric(vertical: MySize.size5!),
       child: Row(
         children: [
           Container(
@@ -113,7 +113,7 @@ class _PostWidgetState extends State<PostWidget> {
 
   Widget getDescription(String description) {
     return Container(
-      margin: EdgeInsets.symmetric(vertical: MySize.size10!),
+      margin: EdgeInsets.symmetric(vertical: MySize.size5!),
       padding: const EdgeInsets.symmetric(horizontal: 8.0),
       child: Text(description),
     );
@@ -124,7 +124,7 @@ class _PostWidgetState extends State<PostWidget> {
     if(list.isEmpty) return const SizedBox();
 
     return Container(
-      margin: EdgeInsets.symmetric(vertical: MySize.size10!),
+      margin: EdgeInsets.symmetric(vertical: MySize.size5!),
       child: AspectRatio(
         aspectRatio: 1,
         child: PhotoViewGallery(
@@ -152,7 +152,7 @@ class _PostWidgetState extends State<PostWidget> {
     UserProvider userProvider = Provider.of<UserProvider>(context);
 
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: MySize.size5!, vertical: MySize.size5!),
+      padding: EdgeInsets.symmetric(horizontal: MySize.size5!),
       child: Row(
         children: [
           Expanded(
@@ -188,18 +188,20 @@ class _PostWidgetState extends State<PostWidget> {
       },
       child: Container(
         padding: EdgeInsets.all(MySize.size5!),
-        child: Column(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            Text(text),
+            SizedBox(width: MySize.size5!,),
+            Icon(iconData, color: Styles.primaryColor, size: MySize.size22!,),
+            SizedBox(width: MySize.size5!,),
             Text(
               count.toString(),
               style: TextStyle(
                 fontSize: MySize.size12!,
               ),
             ),
-            SizedBox(height: MySize.size3!,),
-            Icon(iconData, color: Styles.primaryColor,),
-            SizedBox(height: MySize.size3!,),
-            Text(text),
+
           ],
         ),
       ),

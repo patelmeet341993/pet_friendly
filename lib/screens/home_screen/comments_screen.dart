@@ -182,7 +182,7 @@ class _CommentsScreenState extends State<CommentsScreen> {
                 imageUrl: comment.createdByImage,
                 fit: BoxFit.cover,
                 placeholder: (context, _) {
-                  return SpinKitFadingCircle(color: Styles.primaryColor,);
+                  return Center(child: SpinKitFadingCircle(color: Styles.primaryColor, size: MySize.size20!,));
                 },
                 errorWidget: (___, __, _) => Container(
                   color: Colors.grey[200],
@@ -216,7 +216,7 @@ class _CommentsScreenState extends State<CommentsScreen> {
                 imageUrl: comment.createdByImage,
                 fit: BoxFit.cover,
                 placeholder: (context, _) {
-                  return SpinKitFadingCircle(color: Styles.primaryColor,);
+                  return Center(child: SpinKitFadingCircle(color: Styles.primaryColor, size: MySize.size20!,));
                 },
                 errorWidget: (___, __, _) => Container(
                   color: Colors.grey[200],
