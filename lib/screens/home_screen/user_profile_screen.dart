@@ -20,6 +20,35 @@ class UserProfileScreen extends StatefulWidget {
 class _UserProfileScreenState extends State<UserProfileScreen> {
   bool isLoading = false;
 
+  Future<void> logout() async {
+    MyPrint.printOnConsole("logout");
+    setState(() {
+      isLoading = true;
+    });
+    bool? isLogout = await showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return MyCupertinoAlertDialogWidget(
+          title: "Logout",
+          description: "Are you sure want to logout?",
+          negativeCallback: () {
+            Navigator.pop(context, false);
+          },
+          positiviCallback: () {
+            Navigator.pop(context, true);
+          },
+        );
+      },
+    );
+
+    if(isLogout != null && isLogout) {
+      await AuthenticationController().logout(context);
+    }
+    setState(() {
+      isLoading = false;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return ModalProgressHUD(
@@ -37,37 +66,17 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                   children: [
                     getProfileDetails(),
                     Center(
-                      child: singleOption1(
-                          iconData: Icons.logout,
-                          option: "Logout",
-                          ontap: () async {
-                            MyPrint.printOnConsole("logout");
-                            setState(() {
-                              isLoading = true;
-                            });
-                            bool? isLogout = await showDialog(
-                              context: context,
-                              builder: (BuildContext context) {
-                                return MyCupertinoAlertDialogWidget(
-                                  title: "Logout",
-                                  description: "Are you sure want to logout?",
-                                  negativeCallback: () {
-                                    Navigator.pop(context, false);
-                                  },
-                                  positiviCallback: () {
-                                    Navigator.pop(context, true);
-                                  },
-                                );
-                              },
-                            );
-
-                            if(isLogout != null && isLogout) {
-                              await AuthenticationController().logout(context);
-                            }
-                            setState(() {
-                              isLoading = false;
-                            });
-                          }
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          singleOption1(
+                            iconData: Icons.logout,
+                            option: "Logout",
+                            ontap: () async {
+                              logout();
+                            },
+                          ),
+                        ],
                       ),
                     ),
                   ],

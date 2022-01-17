@@ -1,6 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:pet_friendly/models/comment_model.dart';
 
+var type = [
+  "Pet Food", "Pet Adoption, Pet Donation", "Pet Surgery", "Pet Help"
+];
+
 class PostModel {
   String id = "", description = "", type = "", createdById = "", createdByName = "", createdByImage = "";
   List<String> images = [];

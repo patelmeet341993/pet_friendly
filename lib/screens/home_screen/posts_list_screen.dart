@@ -4,6 +4,7 @@ import 'package:pet_friendly/controllers/post_controller.dart';
 import 'package:pet_friendly/models/post_model.dart';
 import 'package:pet_friendly/screens/common/components/app_bar.dart';
 import 'package:pet_friendly/screens/home_screen/components/post_widget.dart';
+import 'package:pet_friendly/screens/home_screen/create_post_screen.dart';
 import 'package:pet_friendly/utils/SizeConfig.dart';
 import 'package:pet_friendly/utils/styles.dart';
 
@@ -31,6 +32,7 @@ class _PostsListScreenState extends State<PostsListScreen> {
       child: SafeArea(
         child: Scaffold(
           backgroundColor: Styles.background,
+          floatingActionButton: getCreatePostFloatingActionButton(),
           body: Column(
             children: [
               MyAppBar(title: "Pet Friendly", backbtnVisible: false, color: Colors.white, rightrow: getRefreshButton(),),
@@ -51,6 +53,18 @@ class _PostsListScreenState extends State<PostsListScreen> {
           ),
         ),
       ),
+    );
+  }
+
+  Widget getCreatePostFloatingActionButton() {
+    return FloatingActionButton(
+      onPressed: () async {
+        await Navigator.pushNamed(context, CreatePostScreen.routeName);
+        futurePosts = PostController().getPosts(context);
+        setState(() {});
+      },
+      backgroundColor: Styles.primaryColor,
+      child: const Icon(Icons.add),
     );
   }
 

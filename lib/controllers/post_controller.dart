@@ -5,6 +5,7 @@ import 'package:pet_friendly/controllers/providers/post_provider.dart';
 import 'package:pet_friendly/models/comment_model.dart';
 import 'package:pet_friendly/models/post_model.dart';
 import 'package:pet_friendly/models/user_model.dart';
+import 'package:pet_friendly/utils/my_print.dart';
 import 'package:provider/provider.dart';
 
 class PostController {
@@ -19,18 +20,6 @@ class PostController {
     postProvider.posts = posts;
 
     return posts;
-  }
-
-  Future<bool> createPost(PostModel postModel) async {
-    bool isSuccess = false;
-
-    try {
-      await FirestoreController().firestore.collection('posts').doc(postModel.id).set(postModel.tomap());
-      isSuccess = true;
-    }
-    catch(e) {}
-
-    return isSuccess;
   }
 
   Future<bool> likeUnlikePost(PostModel postModel, UserModel userModel, {bool isLike = true}) async {
@@ -67,7 +56,9 @@ class PostController {
       }
       isSuccess = true;
     }
-    catch(e) {}
+    catch(e) {
+      MyPrint.printOnConsole("Error in Like:${e}");
+    }
 
     return isSuccess;
   }
@@ -85,8 +76,11 @@ class PostController {
 
       await FirestoreController().firestore.collection("posts").doc(postModel.id).update({"comments" : FieldValue.arrayUnion([commentModel.tomap()])});
       isSuccess = true;
+      postModel.comments.add(commentModel);
     }
-    catch(e) {}
+    catch(e) {
+      MyPrint.printOnConsole("Error in Commenting On Post:${e}");
+    }
 
     return isSuccess;
   }
