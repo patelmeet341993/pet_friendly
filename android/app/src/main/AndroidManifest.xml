@@ -4,7 +4,7 @@
     <uses-permission android:name="android.permission.INTERNET"/>
 
    <application
-        android:label="Pet Friendly"
+        android:label="Pet Care"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"
