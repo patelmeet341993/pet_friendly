@@ -97,12 +97,12 @@ class _OtpScreenState extends State<OtpScreen> {
 
         //_otpController?.text = "";
         if (mounted) setState(() {});
-        Snakbar().show_error_snakbar(context, "Try Again");
+        Snakbar().showErrorSnakbar(context: context, error_message: "Try Again");
         //_otpController?.text = "";
       },
       codeSent: (verificationId, [forceResendingToken]) {
         print("OTP Sent");
-        Snakbar().show_success_snakbar(context, "Otp Sent");
+        Snakbar().showSuccessSnakbar(context: context, success_message: "Otp Sent");
         //MyToast.showSuccess("OTP sent to your mobile", context);
         this.verificationId = verificationId;
         // istimer = true;
@@ -134,7 +134,7 @@ class _OtpScreenState extends State<OtpScreen> {
         otpErrorMsg = "";
         isTimerOn = false;
         if (mounted) setState(() {});
-        Snakbar().show_success_snakbar(context, "Try Again");
+        Snakbar().showSuccessSnakbar(context: context, success_message: "Try Again");
       },
     );
   }
@@ -173,7 +173,7 @@ class _OtpScreenState extends State<OtpScreen> {
       print("Error in Verifying OTP in Auth_Service:" + e.code);
 
       if (e.code == "invalid-verification-code") {
-        Snakbar().show_error_snakbar(context, "Wrong OTP");
+        Snakbar().showErrorSnakbar(context: context, error_message: "Wrong OTP");
       }
 
       setState(() {
@@ -440,12 +440,18 @@ class _OtpScreenState extends State<OtpScreen> {
 
                 bool result = await verifyOTP(otp: otp, verificationId: verificationId);
               }
-              else Snakbar().show_error_snakbar(context, "OTP Expired, Plase Resend");
+              else {
+                Snakbar().showErrorSnakbar(context: context, error_message: "OTP Expired, Plase Resend");
+              }
             }
           }
-          else MyPrint.printOnConsole("Otp Not Sent");
+          else {
+            MyPrint.printOnConsole("Otp Not Sent");
+          }
         }
-        else Snakbar().show_error_snakbar(context, "No Internet");
+        else {
+          Snakbar().showErrorSnakbar(context: context, error_message: "No Internet");
+        }
       },
       child: Container(
         padding: EdgeInsets.symmetric(vertical: MySize.size16!),

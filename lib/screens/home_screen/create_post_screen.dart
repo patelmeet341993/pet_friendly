@@ -299,10 +299,10 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
             print("Invalid Fields");
 
             if(selectedType == null) {
-              Snakbar().show_error_snakbar(context, "Select Post Type");
+              Snakbar().showErrorSnakbar(context: context, error_message: "Select Post Type");
             }
             else if(images.isEmpty) {
-              Snakbar().show_error_snakbar(context, "Images Cannot Be Empty");
+              Snakbar().showErrorSnakbar(context: context, error_message: "Images Cannot Be Empty");
             }
           }
         },

@@ -72,7 +72,7 @@ class AuthenticationController {
               MyPrint.printOnConsole("Methods:${methods}");
 
               MyPrint.printOnConsole("Message:Account Already Exist With Different Method");
-              Snakbar().show_error_snakbar(context, "Account Already Exist With Different Method");
+              Snakbar().showErrorSnakbar(context: context, error_message: "Account Already Exist With Different Method");
             }
             break;
 
@@ -80,35 +80,35 @@ class AuthenticationController {
             {
               message = "Credential is Invalid";
               MyPrint.printOnConsole("Message:Invalid Credentials");
-              Snakbar().show_error_snakbar(context, "Invalid Credentials");
+              Snakbar().showErrorSnakbar(context: context, error_message: "Invalid Credentials");
             }
             break;
 
           case "operation-not-allowed" :
             {
               MyPrint.printOnConsole("Message:${e.message}");
-              Snakbar().show_error_snakbar(context, "${e.message}");
+              Snakbar().showErrorSnakbar(context: context, error_message: "${e.message}");
             }
             break;
 
           case "user-disabled" :
             {
               MyPrint.printOnConsole("Message:${e.message}");
-              Snakbar().show_error_snakbar(context, "${e.message}");
+              Snakbar().showErrorSnakbar(context: context, error_message: "${e.message}");
             }
             break;
 
           case "user-not-found" :
             {
               MyPrint.printOnConsole("Message:${e.message}");
-              Snakbar().show_error_snakbar(context, "${e.message}");
+              Snakbar().showErrorSnakbar(context: context, error_message: "${e.message}");
             }
             break;
 
           case "wrong-password" :
             {
               MyPrint.printOnConsole("Message:${e.message}");
-              Snakbar().show_error_snakbar(context, "${e.message}");
+              Snakbar().showErrorSnakbar(context: context, error_message: "${e.message}");
             }
             break;
 
@@ -116,7 +116,7 @@ class AuthenticationController {
             {
               message = "Error in Authentication";
               MyPrint.printOnConsole("Message:${e.message}");
-              Snakbar().show_error_snakbar(context, "${e.message}");
+              Snakbar().showErrorSnakbar(context: context, error_message: "${e.message}");
             }
         }
       }

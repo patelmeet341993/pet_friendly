@@ -78,7 +78,9 @@ class _LoginScreenState extends State<LoginScreen> {
         Navigator.pushNamed(context, OtpScreen.routeName, arguments: "+91" + mobileController!.text);
       }
     }
-    else Snakbar().show_error_snakbar(context, "No Internet");
+    else {
+      Snakbar().showErrorSnakbar(context: context, error_message: "No Internet");
+    }
 
   }
 
