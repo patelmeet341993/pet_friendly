@@ -6,39 +6,43 @@ class Snakbar{
   static Snakbar? _instance;
 
   factory Snakbar() {
-    if(_instance == null) {
-      _instance = Snakbar._();
-    }
+    _instance ??= Snakbar._();
     return _instance!;
   }
 
   Snakbar._();
 
-  void show_success_snakbar(BuildContext context, String success_message){
-    showTopSnackBar(
-      context,
-      CustomSnackBar.success(
-        message:success_message,
-      ),
-    );
-
+  void showSuccessSnakbar({required BuildContext context, required String success_message}){
+    OverlayState? state = Overlay.of(context);
+    if(state != null) {
+      showTopSnackBar(
+        state,
+        CustomSnackBar.success(
+          message:success_message,
+        ),
+      );
+    }
   }
-  void show_info_snakbar(BuildContext context, String info_message){
-    showTopSnackBar(
-      context,
-      CustomSnackBar.info(
-        message:info_message,
-      ),
-    );
-
+  void showInfoSnakbar({required BuildContext context, required String info_message}){
+    OverlayState? state = Overlay.of(context);
+    if(state != null) {
+      showTopSnackBar(
+        state,
+        CustomSnackBar.info(
+          message:info_message,
+        ),
+      );
+    }
   }
-  void show_error_snakbar(BuildContext context, String error_message){
-    showTopSnackBar(
-      context,
-      CustomSnackBar.error(
-        message: error_message,
-      ),
-    );
-
+  void showErrorSnakbar({required BuildContext context, required String error_message}){
+    OverlayState? state = Overlay.of(context);
+    if(state != null) {
+      showTopSnackBar(
+        state,
+        CustomSnackBar.error(
+          message: error_message,
+        ),
+      );
+    }
   }
 }
