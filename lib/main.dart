@@ -5,7 +5,6 @@ import 'package:pet_friendly/controllers/navigation_controller.dart';
 import 'package:pet_friendly/controllers/providers/connection_provider.dart';
 import 'package:pet_friendly/controllers/providers/post_provider.dart';
 import 'package:pet_friendly/controllers/providers/user_provider.dart';
-import 'package:pet_friendly/splash_screen.dart';
 import 'package:provider/provider.dart';
 
 void main() async {
