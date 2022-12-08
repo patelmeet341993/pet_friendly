@@ -46,7 +46,7 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
     print("Picked File: ${pickedFile}");
 
     if(pickedFile != null) {
-      File? newImage = await ImageCropper.cropImage(
+      CroppedFile? newImage = await ImageCropper().cropImage(
         compressQuality: 70,
         compressFormat: ImageCompressFormat.jpg,
         sourcePath: pickedFile.path,
@@ -54,17 +54,19 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
         aspectRatioPresets: [
           CropAspectRatioPreset.square,
         ],
-        androidUiSettings: const AndroidUiSettings(
-          toolbarTitle: 'Crop Image',
-          toolbarColor: Colors.red,
-          toolbarWidgetColor: Colors.white,
-          initAspectRatio: CropAspectRatioPreset.square,
-          lockAspectRatio: true,
-        ),
-        iosUiSettings: const IOSUiSettings(
-          minimumAspectRatio: 1.0,
-          aspectRatioLockEnabled: true,
-        ),
+        uiSettings: [
+          AndroidUiSettings(
+            toolbarTitle: 'Crop Image',
+            toolbarColor: Colors.red,
+            toolbarWidgetColor: Colors.white,
+            initAspectRatio: CropAspectRatioPreset.square,
+            lockAspectRatio: true,
+          ),
+          IOSUiSettings(
+            minimumAspectRatio: 1.0,
+            aspectRatioLockEnabled: true,
+          ),
+        ],
       );
 
       setState(() {
